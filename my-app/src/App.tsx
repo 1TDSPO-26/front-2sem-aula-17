@@ -1,29 +1,31 @@
+import { Outlet } from "react-router";
 import Cabecalho from "./components/Cabecalho";
-import ObservadorDeRota from "./components/ObservadorDeRota";
-
 import Rodape from "./components/Rodape";
-import { Outlet, Link } from "react-router";
+import { useState } from "react";
+import { Layout } from "./components/Layout";
+
+  type Tema = 'light' | 'dark';
 
 export default function App() {
+
+  const [tema, setTema] = useState<Tema>('light');
+
   return (
     <div>
-      <Cabecalho/>
-      
-      <Rodape/>
-      <>
-        <ObservadorDeRota/>
-      <header>
-        <nav>
-          <Link to="/">Início</Link> | 
-          <Link to="/produtos">Produtos</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <footer>
-        <p>© Sistema de Produtos</p>
-      </footer>
-    </>
-  
+      <Layout tema={tema}/>
     </div>
   )
 }
+
+// export default function App() {
+
+//   const [tema, setTema] = useState<Tema>('light');
+
+//   return (
+//     <div>
+//       <Cabecalho />
+//       <Outlet />
+//       <Rodape />
+//     </div>
+//   )
+// }

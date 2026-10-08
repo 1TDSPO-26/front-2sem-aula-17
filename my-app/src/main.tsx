@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
+import "./globals.css";
 
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './routes/Home/index.tsx'
@@ -8,6 +9,7 @@ import EditarProdutos from './routes/EditarProdutos/index.tsx'
 import Produtos from './routes/Produtos/index.tsx'
 import Error from './routes/Error/index.tsx'
 import CadProduto from './routes/CadProduto/index.tsx';
+import { NomeLojaProvider } from './provider/NomeLojaProvider.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <NomeLojaProvider>
+      <RouterProvider router={router} />
+    </NomeLojaProvider>
   </StrictMode>,
 )
