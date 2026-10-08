@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { Contador } from "../../components/Contador";
 
 type TipoUsuarioGit = {
     login: string;
@@ -26,12 +26,13 @@ type TipoUsuarioGit = {
 
 export default function Home() {
 
+    //Modificar o título da página;
     document.title = "Home";
 
-    const [usuarios, setUsuario] = useState<TipoUsuarioGit[]>([]);
+    const [usuarios, setUsuarios] = useState<TipoUsuarioGit[]>([]);
 
     useEffect(() => {
-
+        //Função assíncrona
         async function loadingData() {
 
             try {
@@ -43,15 +44,15 @@ export default function Home() {
 
                 const data: TipoUsuarioGit[] = await response.json();
 
-                setUsuario(data);
+                setUsuarios(data);
 
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         }
 
-        loadingData();
-
+        //Executando a função
+        // loadingData();
 
     }, []);
 
@@ -65,6 +66,9 @@ export default function Home() {
                     ))}
                 </ul>
             </div>
+
+            <Contador />
+
         </main>
     )
 }
