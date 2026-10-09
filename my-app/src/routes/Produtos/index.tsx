@@ -1,14 +1,15 @@
 
 import { useEffect, useState } from "react";
-import type { TipoProdutoJson } from "../../types/types";
+import type { TipoProduto, TipoProdutoJson } from "../../types/types";
 import { Link, useNavigate } from "react-router";
+import Cardproduto from "../../components/CardProduto/Cardproduto";
 
 
 export default function Produtos() {
   document.title = "Produtos"
 
   const navigate = useNavigate();
-  const [produtos, setProdutos] = useState<TipoProdutoJson[]>([])
+  const [produtos, setProdutos] = useState<TipoProduto[]>([])
 
   useEffect(() => {
     // requisição para o backend apenas uma vez
@@ -18,7 +19,7 @@ export default function Produtos() {
         if (!response.ok) {
           throw new Error(`Erro na listagem de produtos: ${response.status} ${response.statusText}`);
         }
-        const data = (await response.json()).map((produto: TipoProdutoJson) => ({
+        const data = (await response.json()).map((produto: TipoProduto) => ({
           ...produto,
           preco: Number(produto.preco),
           estoque: Number(produto.estoque),
@@ -37,25 +38,33 @@ export default function Produtos() {
       const response = await fetch(`http://localhost:3001/produtos/${id}`, {
         method: "DELETE",
       });
+
       if (!response.ok) {
-        throw new Error(`Erro na exclusão do produto: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `A exclusão falhou: ${response.status} - ${response.statusText}`,
+        );
       }
 
-      alert("Produto excluído com sucesso!");
-      navigate("/produtos");
-
-      // Atualizar a lista de produtos após a exclusão
-      setProdutos(produtos.filter((p) => p.id !== id));
+      //MSG de SUCESSO
+      alert("O produto foi excluído com sucesso!");
+      //Redirecionando para a página de produtos
+      navigate("/");
     } catch (error) {
-      console.error("Erro ao excluir produto:", error);
+      console.error(error);
     }
+    
   };
 
   return (
     <main>
       <h2>Produtos</h2>
+       <div className="flex">
+       {produtos.map( (p)=>(
+                    <Cardproduto produto={p} />
+                ))}
+      </div>     
 
-      <table border={1} cellPadding={10} style={{ width: '100%', borderCollapse: 'collapse' }}>
+      {/* <table border={1} cellPadding={10} style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr style={{ backgroundColor: '#be7310', color: '#050505' }}>
             <th>ID</th>
@@ -83,7 +92,9 @@ export default function Produtos() {
         <tr>
           <td>Quantidade de produtos - {produtos.length}</td>
         </tr>
-      </table>
+      </table> */}
+
+
 
     </main >
   )

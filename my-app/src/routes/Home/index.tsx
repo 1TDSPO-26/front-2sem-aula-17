@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Contador } from "../../components/Contador/Contador";
 
 // 1. Definimos o tipo para UM usuário individual
 type UsuarioType = {
@@ -76,6 +77,8 @@ export default function Home() {
           </li>
         ))}
       </ul>
+
+    
     </main>
   );
 }
