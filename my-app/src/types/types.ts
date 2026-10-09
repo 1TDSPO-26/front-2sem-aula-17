@@ -1,9 +1,15 @@
+import type { ReactNode } from "react";
+
 export interface TipoProduto {
     id: number,
     nome: string,
     preco: number,
-    descricao: string,
+    estoque: string,
     avatar: string,
+}
+
+export interface TipoProdutoAll {
+    produto:TipoProduto;
 }
 
 export type TipoProdutoJ = {
@@ -12,4 +18,14 @@ export type TipoProdutoJ = {
     preco: number;
     estoque: number;
     avatar: string;
+}
+
+export type Tema = 'light' | 'dark';
+
+export type LayoutProps = {
+  tema: Tema;
+};
+
+export type NomeLojaProviderProps = {
+children: ReactNode;
 }

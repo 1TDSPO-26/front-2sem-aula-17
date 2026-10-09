@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Contador } from "../../components/Contador";
 
 type TipoUsuarioGit = {
     login: string;
@@ -65,6 +66,9 @@ export default function Home() {
                     ))}
                 </ul>
             </div>
+
+                    <Contador/>
+
         </main>
     )
 }
